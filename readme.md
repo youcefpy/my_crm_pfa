@@ -3,7 +3,11 @@
 you need first to install the pipenv with this command : 
 ```markdown
 pip install pipenv
+```
 
+## Clone the project
+```bash
+git clone https://github.com/youcefpy/my_crm_pfa.git
 ```
 
 ## installing the dependencies and the packages
@@ -17,7 +21,6 @@ for runing the virtuel envirement you need to run :
 
 ```bash 
 pipenv shell 
-
 ```
 
 ## Make migrations of the database 
