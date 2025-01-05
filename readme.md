@@ -32,6 +32,13 @@ py manage.py makemigraitons
 py manage.py migrate
 ```
 
+## Creating a superuser
+```bash
+py manage.py createsuperuser
+```
+
+
+
 ## Run the server 
 ```bash
 py manage.py runserver
