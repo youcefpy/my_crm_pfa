@@ -23,18 +23,18 @@ pipenv shell
 ## Make migrations of the database 
 
 ```bash
-    py manage.py makemigraitons
+py manage.py makemigraitons
 ```
 
 ## Migrate
 
 ```bash
-    py manage.py migrate
+py manage.py migrate
 ```
 
 ## Run the server 
 ```bash
-    py manage.py runserver
+py manage.py runserver
 ```
 
 ## todo 
