@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}CRM-Home{% endblock title %} 
+
+{% block content %}
+    <div class="container">
+        <h1>Prospect</h1>
+        <div>
+            <p>
+                <a href="{% url 'create_lead' %}" class="btn btn-primary">Crée un prospet</a>
+                <a href="{% url 'create_agent' %}" class="btn btn-primary">Crée un agent</a>
+                <a href="{% url 'list_agents' %}" class="btn btn-primary">Liste des agents</a>
+            </p>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Numero de tel</th>
+                <th scope="col">Email</th>
+                <th scope="col">age</th>
+                <th scope="col">Est appeller</th>
+                <th scope="col">Source de Prospect</th>
+                <th scope="col">agent</th>
+                <th>Actions</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                {% for lead in leads %}
+                    <tr>
+                        <td>{{ lead.id }}</td>
+                        <td>{{ lead.first_name }}</td>
+                        <td>{{ lead.last_name }}</td>
+                        <td>{{ lead.phone_number }}</td>
+                        <td>{{ lead.email }}</td>
+                        <td>{{ lead.age }}</td>
+                        <td>{{ lead.phoned|yesno:"Oui,Non" }}</td>
+                        <td>{{ lead.source }}</td>
+                        <td>{{ lead.agent }}</td>
+                        <td>
+                            <a href="{% url 'details_page' lead.id %}" class="btn btn-primary">Détails</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+
+{% endblock content %}
+
+

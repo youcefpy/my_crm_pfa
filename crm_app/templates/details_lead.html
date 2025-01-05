@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Détails sur le prospect : {{ get_lead.first_name }} {{ get_lead.last_name }}{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h2>{{ get_lead.first_name }} {{ get_lead.last_name }}</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Numero de tel :</strong> {{ get_lead.phone_number }}</p>
+            <p><strong>Email :</strong> {{ get_lead.email }}</p>
+            <p><strong>Âge :</strong> {{ get_lead.age }}</p>
+            <p><strong>A été appelé :</strong> {{ get_lead.phoned|yesno:"Oui,Non" }}</p>
+            <p><strong>Source de prospect :</strong> {{ get_lead.source }}</p>
+            <p><strong>Agent :</strong> {{ get_lead.agent }}</p>
+
+            {% if get_lead.profile_picture %}
+                <p><strong>Photo de profil :</strong></p>
+                <img src="{{ get_lead.profile_picture.url }}" alt="Photo de profil" class="img-thumbnail" style="max-width: 200px;">
+            {% else %}
+                <p><strong>Photo de profil :</strong> Non disponible</p>
+            {% endif %}
+
+            {% if get_lead.file_field %}
+                <p><strong>Document joint :</strong> 
+                    <a href="{{ get_lead.file_field.url }}" class="btn btn-link" download>Télécharger</a>
+                </p>
+            {% else %}
+                <p><strong>Document joint :</strong> Non disponible</p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'update_lead' get_lead.id %}" class="btn btn-success">Modifier</a>
+            <a href="{% url 'delete_lead' get_lead.id %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prospect ?');">Supprimer</a>
+
+            <a href="{% url 'send_email' get_lead.id %}" class="btn btn-primary">Envoyer un email</a>
+        </div>
+    </div>
+    <div class="mt-4 mb-4">
+        <a href="{% url 'index' %}" class="btn btn-secondary">Revenir à la liste des prospects</a>
+    </div>
+</div>
+{% endblock content %}
