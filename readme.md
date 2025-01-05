@@ -2,7 +2,6 @@
 ## Instalation of pipenv 
 you need first to install the pipenv with this command : 
 ```markdown
-```bash
 pip install pipenv
 
 ```
