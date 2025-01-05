@@ -45,13 +45,15 @@ py manage.py runserver
 ```
 
 ## todo 
-this paragraphe is wroten in French
+This paragraphe is wroten in French
 
 j'ai une serie de prospets :
-un prospet peut devenir client comment je peut le perdre 
-si le prospet et client dont je vais l'ajouter a la table client et je vais le retirer de prospet
-si il est perdu je le supprime 
-dans la page d'acceuil on ajoutes des graphe comme le nombre de prospet sous forme de bar 
-le nombre de clients on ajoute des filtre par annees, par source et tous 
-le nombre de clients perdus source de la magorité de client perdu.
-agent qui a plus de clients
+ - Un prospet peut devenir client comme je peut le perdre 
+ - Si le prospet devient un client donc je vais l'ajouter a la table client et je vais le retirer de prospet.
+ - Si il est perdu alors je le supprime 
+## Page d'accueil
+Dans la page d'accueil on ajoute des graphe: 
+- Le nombre de prospet par jour representé par un graphe a bar 
+- Le nombre de clients. On ajoute des filtre par jours, mois, annees et par source de prospet 
+- Graphe pour le nombre de prospet perdus ainsi que leurs source de provenance (Youtube, Google...).
+- Agent qui a plus de clients | agent qui a perdu plus de prospet 
