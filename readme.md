@@ -50,6 +50,12 @@ py manage.py runserver
 ## todo 
 This paragraphe is wroten in French
 
+-   Authentification :
+    -   Chaque agent doit s'authentifier
+    -   L'agent peut voir que c'est propre prospet et client
+    -   L'admin peut avoir une vision global sur les prospet de tous les agents
+    -   Une authentification est pre-requie pour n'importe quelle actions sur le crm 
+
 j'ai une serie de prospets :
  - Un prospet peut devenir client comme je peut le perdre 
  - Si le prospet devient un client donc je vais l'ajouter a la table client et je vais le retirer de prospet.
