@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Agent,Lead,User
+from .models import Agent,Lead,User,Client
 
 
 # Register your models here.
@@ -14,6 +14,11 @@ class LeadAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = [field.name for field in User._meta.fields]
 
+class ClientAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Client._meta.fields]
+
+
 admin.site.register(Agent,AgentAdmin)
 admin.site.register(Lead,LeadAdmin)
 admin.site.register(User,UserAdmin)
+admin.site.register(Client,ClientAdmin)

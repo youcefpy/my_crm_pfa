@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.urls import path
 from .views import (
     index,details,creat_lead,list_agents,update_lead,delete_lead,send_email_to_lead,
-    SignupView,logout_view,create_agent
+    SignupView,logout_view,create_agent,create_client,list_client
     )
 
 urlpatterns = [
@@ -20,5 +20,7 @@ urlpatterns = [
     path('cree-agent/', create_agent, name='create_agent'),
     path('list-agents',list_agents,name='list_agents'),
     path('send-email/<pk>',send_email_to_lead,name="send_email"),
+    path('cree-client/<pk>',create_client,name='create_client'),
+    path('liste-client/',list_client,name='list_client'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

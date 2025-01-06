@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.forms import UserCreationForm
-from .models import Lead,Agent
+from .models import Lead,Agent,Client
 from .forms import LeadForm,CustomUserCreationForm,AgentForm
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
@@ -173,3 +173,44 @@ def send_email_to_lead(request,pk):
         'lead':lead,
     }
     return render(request,'leads/send_email.html',context)
+
+
+####################### CREATION DE CLINET ################################
+
+def create_client(request,pk):
+    """
+    On cree un client a partir d'un lead (prospet).
+    Apres contact de l'agent avec le prospet. le prospet accepte d'acheté le produit ou la transaction. le client va ajouté le prospet a la liste des clients
+    
+    pour faire ca il nous faut d'abord recuperer le prospet (id).
+    on cree le client. 
+
+    le prospet doit etre supprimer de la table Lead et ajouter a la table Client
+
+    """
+    lead = Lead.objects.get(id=pk)
+    if lead.is_client:
+        return redirect('list_client')
+
+    lead.is_client = True
+    lead.save()
+
+    #creation d'un client basé sur le lead
+    Client.objects.create(lead=lead)
+    
+    return redirect('list_client')
+
+########## List Client ###########
+
+def list_client(request):
+    if request.user.is_superuser:
+        clients = Client.objects.all()
+    else : 
+        agent = request.user.agent 
+        clients = Client.objects.filter(lead__agent = agent)
+
+    context = {
+        'clients':clients
+    }
+
+    return render(request,'clients/list_clients.html',context)

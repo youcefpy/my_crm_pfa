@@ -20,7 +20,7 @@ class Agent(models.Model):
         return self.user.username
 
 class Lead(models.Model):
-    
+
     SOURCE_CHOICES = (
         ('Youtube','Youtube'),
         ('Google','Goole'),
@@ -43,6 +43,17 @@ class Lead(models.Model):
     file_field = models.FileField(null=True, blank=True,upload_to='documents/')
 
     agent = models.ForeignKey(Agent,on_delete=models.CASCADE)
+    is_client = models.BooleanField(default=False)
 
     def __str__(self):
         return f"prenom : {self.first_name} | nom: {self.last_name}"
+    
+
+
+#### Creation de model client
+class Client(models.Model):
+    lead = models.OneToOneField(Lead,on_delete=models.CASCADE)
+    created_at= models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Client basé sur le prospet : {self.lead.first_name} {self.lead.last_name}"

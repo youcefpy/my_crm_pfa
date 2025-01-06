@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}CRM-Home{% endblock title %} 
+
+{% block content %}
+    <div class="container">
+        <h1>Clients</h1>
+
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Numero de tel</th>
+                <th scope="col">Email</th>
+                <th scope="col">age</th>
+                <th scope="col">Est appeller</th>
+                <th scope="col">Source de Prospect</th>
+                <th scope="col">agent</th>
+                <th>Actions</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.lead.id }}</td>
+                        <td>{{ client.lead.first_name }}</td>
+                        <td>{{ client.lead.last_name }}</td>
+                        <td>{{ client.lead.phone_number }}</td>
+                        <td>{{ client.lead.email }}</td>
+                        <td>{{ client.lead.age }}</td>
+                        <td>{{ client.lead.phoned|yesno:"Oui,Non" }}</td>
+                        <td>{{ client.lead.source }}</td>
+                        <td>{{ client.lead.agent }}</td>
+                        <td>En Construction</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+
+{% endblock content %}
+
+

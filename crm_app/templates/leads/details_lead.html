@@ -32,11 +32,15 @@
                 <p><strong>Document joint :</strong> Non disponible</p>
             {% endif %}
         </div>
-        <div class="card-footer">
-            <a href="{% url 'update_lead' get_lead.id %}" class="btn btn-success">Modifier</a>
-            <a href="{% url 'delete_lead' get_lead.id %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prospect ?');">Supprimer</a>
-
-            <a href="{% url 'send_email' get_lead.id %}" class="btn btn-primary">Envoyer un email</a>
+        <div class="card-footer d-flex justify-content-between">
+            <div>
+                <a href="{% url 'update_lead' get_lead.id %}" class="btn btn-secondary">Modifier</a>
+                <a href="{% url 'delete_lead' get_lead.id %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prospect ?');">Prospet Perdu</a>
+                <a href="{% url 'send_email' get_lead.id %}" class="btn btn-primary">Envoyer un email</a>
+            </div>
+            <div>
+                <a href="{% url 'create_client' get_lead.id %}" class="btn btn-success">Convertir en Client</a>
+            </div>
         </div>
     </div>
     <div class="mt-4 mb-4">

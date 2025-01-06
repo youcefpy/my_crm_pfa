@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Lead,Agent,User
+from .models import Lead,Agent,User,Client
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -26,3 +26,8 @@ class AgentForm(ModelForm):
     class Meta:
         model = Agent
         fields='__all__'
+
+# class ClientForm(ModelForm):
+#     class Meta:
+#         model = Client
+#         fields = '__all__'
