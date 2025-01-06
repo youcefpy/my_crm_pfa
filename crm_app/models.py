@@ -45,6 +45,8 @@ class Lead(models.Model):
     agent = models.ForeignKey(Agent,on_delete=models.CASCADE)
     is_client = models.BooleanField(default=False)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"prenom : {self.first_name} | nom: {self.last_name}"
     
