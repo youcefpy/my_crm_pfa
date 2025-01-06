@@ -11,6 +11,12 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class LeadForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        exclude_agent = kwargs.pop('exclude_agent', False)  
+        super().__init__(*args, **kwargs) 
+        if exclude_agent:
+            self.fields.pop('agent')
+
     class Meta:
         model = Lead
         fields = '__all__'

@@ -31,7 +31,14 @@ def logout_view(request):
 
 @login_required
 def index(request):
-    leads = Lead.objects.all()
+    if request.user.is_superuser:
+        leads = Lead.objects.all()
+    else :
+        try:
+            agent = request.user.agent
+            leads = Lead.objects.filter(agent=agent)
+        except : 
+            print("Erreur!")
     context = {
         'leads':leads
     }
@@ -41,14 +48,27 @@ def index(request):
 ########## create lead view #######
 @login_required
 def creat_lead(request):
+    '''
+        Dans cette fonction create_lead cree prospet on commance par verifier si l'utilisateur est admin. si il est admin il peut cree des leads et ajouter des agent. si l'utilisateur n;est pas admin alors le champ agent <- l'utilisateur connecté.
+    '''
     if request.method == "POST":
-        form = LeadForm(request.POST,request.FILES)
+        if request.user.is_superuser:
+            form = LeadForm(request.POST,request.FILES)
+        else :
+            form = LeadForm(request.POST,request.FILES,exclude_agent=True)
 
         if form.is_valid():
-            form.save()
+            lead = form.save(commit=False) # commit = Fasle c-a-d que je ne doit pas sauvgarde dans la db
+            if not request.user.is_superuser:
+                # si user n'est pas admin alors le champ agent recoit request.user.agent
+                lead.agent = request.user.agent
+            lead.save() # sauvgarde dans la db avec verification
             return redirect('index')
     else :
-        form = LeadForm()
+        if request.user.is_superuser :
+            form = LeadForm()
+        else : 
+            form = LeadForm(exclude_agent=True)
     
     context = {
         'form':form
@@ -63,15 +83,25 @@ def update_lead(request,pk):
     lead = Lead.objects.get(id=pk)
     form = LeadForm(instance=lead)
     if request.method=="POST":
-        form = LeadForm(request.POST,request.FILES,instance=lead)
+        if request.user.is_superuser:
+            form = LeadForm(request.POST,request.FILES,instance=lead)
+        else : 
+            form = LeadForm(request.POST,request.FILES,instance=lead,exclude_agent=True)
         if form.is_valid():
-            form.save()
+            lead = form.save(commit=False)
+            if not request.user.is_superuser:
+                lead.agent = request.user.agent
+            lead.save()
             return redirect('index')
+    else:
+        if request.user.is_superuser:
+            form = LeadForm(instance=lead)
+        else:
+            form = LeadForm(instance=lead, exclude_agent=True)
     context = {
         'lead':lead,
         'form' : form
     }
-
     return render(request,'leads/update_lead.html',context )
 
 
