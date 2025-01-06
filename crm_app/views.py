@@ -54,7 +54,7 @@ def creat_lead(request):
         'form':form
 
     }
-    return render(request,'create_lead.html',context)
+    return render(request,'leads/create_lead.html',context)
 
 
 ################### Update load view #############################
@@ -72,7 +72,7 @@ def update_lead(request,pk):
         'form' : form
     }
 
-    return render(request,'update_lead.html',context )
+    return render(request,'leads/update_lead.html',context )
 
 
 ############## Delete Lead View #####################
@@ -93,7 +93,7 @@ def details(request,pk):
     context = {
         'get_lead':get_lead,
     }
-    return render(request,'details_lead.html',context)
+    return render(request,'leads/details_lead.html',context)
 
 
 ########## create agent  view #######
@@ -109,7 +109,7 @@ def create_agent(request):
     context = {
         'form' :form
     }
-    return render(request,'create_agent.html',context)
+    return render(request,'agents/create_agent.html',context)
 
 
 ########### List of agents #############
@@ -120,7 +120,7 @@ def list_agents(request) :
     context={
         'agents':agents
     }
-    return render(request,'list_agents.html',context)
+    return render(request,'agents/list_agents.html',context)
 
 ################ Logic of sending an email for each user #######################
 @login_required
@@ -142,4 +142,4 @@ def send_email_to_lead(request,pk):
     context = {
         'lead':lead,
     }
-    return render(request,'send_email.html',context)
+    return render(request,'leads/send_email.html',context)
