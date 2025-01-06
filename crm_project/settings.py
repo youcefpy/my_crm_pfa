@@ -132,7 +132,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 AUTH_USER_MODEL = 'crm_app.User'
 
 
-
+#LOGIN REDIRECT URL
+LOGIN_REDIRECT_URL ="/"
+#LOGIN URL
+LOGIN_URL = '/login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

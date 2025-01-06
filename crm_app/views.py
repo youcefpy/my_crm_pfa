@@ -1,6 +1,10 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,redirect
+from django.views import generic
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.forms import UserCreationForm
 from .models import Lead,Agent
-from .forms import LeadForm,AgentForm
+from .forms import LeadForm,CustomUserCreationForm,AgentForm
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 
@@ -14,6 +18,18 @@ from django.core.mail import send_mail
 def is_super_user(user):
     return user.is_superuser
 
+class SignupView(generic.CreateView):
+    template_name = 'registration/signup.html'
+    form_class = CustomUserCreationForm
+
+    def get_success_url(self):
+        return "/login/"
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
 def index(request):
     leads = Lead.objects.all()
     context = {
@@ -23,6 +39,7 @@ def index(request):
 
 
 ########## create lead view #######
+@login_required
 def creat_lead(request):
     if request.method == "POST":
         form = LeadForm(request.POST,request.FILES)
@@ -41,7 +58,7 @@ def creat_lead(request):
 
 
 ################### Update load view #############################
-
+@login_required
 def update_lead(request,pk):
     lead = Lead.objects.get(id=pk)
     form = LeadForm(instance=lead)
@@ -59,7 +76,7 @@ def update_lead(request,pk):
 
 
 ############## Delete Lead View #####################
-
+@login_required
 def delete_lead(request,pk):
 
     lead = Lead.objects.get(id=pk)
@@ -70,6 +87,7 @@ def delete_lead(request,pk):
 
 
 ########## details leads view #######
+@login_required
 def details(request,pk):
     get_lead = Lead.objects.get(id=pk)
     context = {
@@ -78,26 +96,24 @@ def details(request,pk):
     return render(request,'details_lead.html',context)
 
 
-
 ########## create agent  view #######
 @user_passes_test(is_super_user)
 def create_agent(request):
-    if request.method == "POST" :
+    if request.method == 'POST':
         form = AgentForm(request.POST)
-
         if form.is_valid():
             form.save()
-
             return redirect('index')
-    
-    else : 
-        form = AgentForm()
+    else:
+        form = AgentForm()  
     context = {
-        'form' : form
+        'form' :form
     }
     return render(request,'create_agent.html',context)
 
+
 ########### List of agents #############
+@user_passes_test(is_super_user)
 def list_agents(request) : 
     agents = Agent.objects.all()
 
@@ -107,7 +123,7 @@ def list_agents(request) :
     return render(request,'list_agents.html',context)
 
 ################ Logic of sending an email for each user #######################
-
+@login_required
 def send_email_to_lead(request,pk):
     lead= Lead.objects.get(id=pk)
 

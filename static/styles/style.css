@@ -1,0 +1,17 @@
+/* Styles personnalisés */
+.navbar {
+    background-color: #007bff; /* Couleur de fond */
+}
+.navbar-brand, .nav-link {
+    color: #fff !important; /* Couleur du texte */
+}
+.btn-custom {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #007bff;
+}
+.btn-custom:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #004085;
+}
