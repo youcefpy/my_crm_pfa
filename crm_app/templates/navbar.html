@@ -1,20 +1,31 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">MonSite</a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             {# <span class="navbar-toggler-icon"></span> #}
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">À propos</a>
+                    <a class="nav-link" href="{% url 'create_lead' %}">Crée Prospet</a>
                 </li>
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create_agent' %}">Crée agent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'list_agents' %}">Liste Agents</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="{% url 'list_client' %}">Liste des Clients</a>
                 </li>
+
             </ul>
             <div class="d-flex">
                 {% if request.user.is_authenticated %}
