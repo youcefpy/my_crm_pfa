@@ -8,8 +8,10 @@ from .forms import LeadForm,CustomUserCreationForm,AgentForm
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.db.models import Count
-from django.db.models.functions import TruncDay
+# from django.db.models.functions import TruncDay
 from django.core.exceptions import ObjectDoesNotExist
+from dashborad_app.views import (get_dashboard_data,get_prospects_by_source,get_agents_comparison,get_clients_by_month,get_lost_prospects_by_source, get_top_performing_agents)
+
 # Create your views here.
 
 
@@ -55,6 +57,14 @@ def logout_view(request):
 @login_required
 @is_agent
 def index(request):
+    # print("Hello")
+    dashboard_context = get_dashboard_data() 
+    gr_get_prospects_by_source= get_prospects_by_source()
+    gr_get_agents_comparison =get_agents_comparison()
+    gr_get_clients_by_month = get_clients_by_month()
+    gr_get_lost_prospects_by_source = get_lost_prospects_by_source()
+    gr_get_top_performing_agents = get_top_performing_agents()
+
     if request.user.is_superuser:
         leads = Lead.objects.all()
     else :
@@ -65,6 +75,20 @@ def index(request):
             return redirect('not_authorized')
     context = {
         'leads':leads,
+        'dashboard_labels': dashboard_context['labels'],
+        'dashboard_data': dashboard_context['data'],
+        'prospects_by_source_labels': gr_get_prospects_by_source['labels'],
+        'prospects_by_source_data': gr_get_prospects_by_source['data'],
+        'performing_agents_labels': gr_get_top_performing_agents['labels'],
+        'performing_agents_data': gr_get_top_performing_agents['data'],
+        'performing_agents_rate': gr_get_top_performing_agents['conversion_rate'],
+        'agents_comparison_labels':gr_get_agents_comparison['labels'],
+        'agents_comparison_data':gr_get_agents_comparison['clients_data'],
+        'agents_comparison_pr_lost_dt':gr_get_agents_comparison['prospects_lost_data'],
+        'get_clients_by_labels':gr_get_clients_by_month['labels'],
+        'get_clients_by_data':gr_get_clients_by_month['data'],
+        'lost_prospects_by_source_labels':gr_get_lost_prospects_by_source['labels'],
+        'lost_prospects_by_source_data':gr_get_lost_prospects_by_source['data'],
     }
     return render(request,'index.html',context)
 

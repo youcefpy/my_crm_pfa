@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index_dashborad
+from .views import dashboard_index
 urlpatterns = [
-    path('',index_dashborad,name="dashborad")
+    path('',dashboard_index,name="dashborad")
 ]

@@ -1,15 +1,63 @@
-{% extends "base.html" %}
 {% load static %}
+<div class="container mt-4">
+    <h1>Tableau de bord</h1>
 
+    <!-- Graphique : Répartition des Prospects par Source -->
+    <div>
+        <h3>Prospects par jour</h3>
+        <canvas id="prospectsByDay"></canvas>
+    </div>
 
-{% block title %}dashborad{% endblock %}
+    <!-- Graphique : Répartition des Prospects par Source -->
+    <div>
+        <h3>Répartition des Prospects par Source</h3>
+        <canvas id="prospectsBySourceChart"></canvas>
+    </div>
 
-{% block navbar %}
-    <!--Desactivation de la navbar -->
-{% endblock %}
-{% block content %}
-    <p>Hello I'am a dashborad</p>
+    <!-- Graphique : Comparaison des Agents -->
+    <div>
+        <h3>Comparaison des Agents</h3>
+        <canvas id="agentsComparisonChart"></canvas>
+    </div>
 
+    <!-- Graphique : Clients Gagnés par Mois -->
+    <div>
+        <h3>Clients Gagnés par Mois</h3>
+        <canvas id="clientsByMonthChart"></canvas>
+    </div>
 
-    <script src="{% static 'scripts/graphic.js' %}" async></script>
-{% endblock %}
+    <!-- Graphique : Prospects Perdus par Source -->
+    <div>
+        <h3>Prospects Perdus par Source</h3>
+        <canvas id="lostProspectsBySourceChart"></canvas>
+    </div>
+
+    <!-- Graphique : Agents les Plus Performants -->
+    <div>
+        <h3>Agents les Plus Performants</h3>
+        <canvas id="topPerformingAgentsChart"></canvas>
+    </div>
+</div>
+
+<script>
+    // Données pour les graphiques
+    const prospectsBySourceLables = JSON.parse('{{ prospects_by_source_labels|safe }}');
+    const prospectsBySourceData = JSON.parse('{{ prospects_by_source_data|safe }}');
+    const agentsComparisonLabels =JSON.parse(' {{ agents_comparison_labels|safe }}');
+    const agentsComparisonData =JSON.parse(' {{ agents_comparison_data|safe }}');
+    const agentsComparisonLeadLostData =JSON.parse(' {{ agents_comparison_pr_lost_dt|safe }}');
+    const clientsByMonthlabel = JSON.parse('{{ get_clients_by_labels|safe }}');
+    const clientsByMonthData = JSON.parse('{{ get_clients_by_data|safe }}');
+    const lostProspectsBySourceLabel = JSON.parse('{{ lost_prospects_by_source_labels|safe }}');
+    const lostProspectsBySourceData = JSON.parse('{{ lost_prospects_by_source_Data|safe }}');
+    const topPerformingAgentslabel =JSON.parse(' {{ performing_agents_labels|safe }}');
+    const topPerformingAgentsData =JSON.parse(' {{ performing_agents_data|safe }}');
+</script>
+
+<script>
+    const chartLabels = JSON.parse('{{ dashboard_labels|safe }}');
+    const chartData = JSON.parse('{{ dashboard_data|safe }}');
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'scripts/prospects_by_day_chart.js' %}" async></script>
