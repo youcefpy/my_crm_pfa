@@ -66,3 +66,12 @@ Dans la page d'accueil on ajoute des graphe:
 - Le nombre de clients. On ajoute des filtre par jours, mois, annees et par source de prospet 
 - Graphe pour le nombre de prospet perdus ainsi que leurs source de provenance (Youtube, Google...).
 - Agent qui a plus de clients | agent qui a perdu plus de prospet 
+
+## Chart.js
+We use Chart.js for displaying graphs on the dashboard. To use it, we first need to install the package.
+
+## install Chart.js 
+with nmp run this command : 
+```bash 
+npm install chart.js
+```

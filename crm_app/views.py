@@ -7,29 +7,53 @@ from .models import Lead,Agent,Client
 from .forms import LeadForm,CustomUserCreationForm,AgentForm
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
-
-
+from django.db.models import Count
+from django.db.models.functions import TruncDay
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 
-
-########## index page view #######
-
+#check if the user if superuser
 def is_super_user(user):
     return user.is_superuser
 
+# check if the user is agent
+def is_agent(view_func):
+    """
+    Vérifie si l'utilisateur est un agent. Si ce n'est pas le cas, il est redirigé.
+    """
+    def wrapper(request, *args, **kwargs):
+        try:
+            if not hasattr(request.user, 'agent'):
+                return redirect('not_authorized')
+        except ObjectDoesNotExist:
+            return redirect('not_authorized')
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
+#non authorized
+@login_required
+def not_authorized(request):
+    return render(request, 'not_authorized.html')
+
+
+####################### Singup view ##################
 class SignupView(generic.CreateView):
     template_name = 'registration/signup.html'
     form_class = CustomUserCreationForm
 
     def get_success_url(self):
         return "/login/"
-
+################ Logout view ################
 def logout_view(request):
     logout(request)
     return redirect('login')
 
+
+########## index page view #######
+
 @login_required
+@is_agent
 def index(request):
     if request.user.is_superuser:
         leads = Lead.objects.all()
@@ -38,9 +62,9 @@ def index(request):
             agent = request.user.agent
             leads = Lead.objects.filter(agent=agent)
         except : 
-            print("Erreur!")
+            return redirect('not_authorized')
     context = {
-        'leads':leads
+        'leads':leads,
     }
     return render(request,'index.html',context)
 
@@ -197,7 +221,7 @@ def create_client(request,pk):
 
     #creation d'un client basé sur le lead
     Client.objects.create(lead=lead)
-    
+
     return redirect('list_client')
 
 ########## List Client ###########
