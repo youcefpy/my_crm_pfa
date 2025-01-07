@@ -6,9 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
+        {% include 'dashboard/index.html' %}
         <h1>Prospect</h1>
         <table class="table table-bordered">
             <thead>
@@ -52,7 +50,6 @@
 
     </div>
 
-    <script src="{% static 'scripts/graphic.js' %}" async></script>
 {% endblock content %}
 
 

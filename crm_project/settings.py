@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     #adding the django application 
     'crm_app',
     "phonenumber_field",
+    'dashborad_app',
 ]
 
 MIDDLEWARE = [
@@ -51,9 +52,7 @@ ROOT_URLCONF = 'crm_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR,'crm_app/templates'),
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
