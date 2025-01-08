@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.db.models import Count
 # from django.db.models.functions import TruncDay
 from django.core.exceptions import ObjectDoesNotExist
-from dashborad_app.views import (get_dashboard_data,get_prospects_by_source,get_agents_comparison,get_clients_by_month,get_lost_prospects_by_source, get_top_performing_agents)
+from dashborad_app.views import (get_dashboard_data,get_prospects_by_source,get_agents_comparison,get_prospet_by_month,get_lost_prospects_by_source, get_top_performing_agents)
 
 # Create your views here.
 
@@ -61,7 +61,7 @@ def index(request):
     dashboard_context = get_dashboard_data() 
     gr_get_prospects_by_source= get_prospects_by_source()
     gr_get_agents_comparison =get_agents_comparison()
-    gr_get_clients_by_month = get_clients_by_month()
+    gr_get_leads_by_month = get_prospet_by_month()
     gr_get_lost_prospects_by_source = get_lost_prospects_by_source()
     gr_get_top_performing_agents = get_top_performing_agents()
 
@@ -85,8 +85,8 @@ def index(request):
         'agents_comparison_labels':gr_get_agents_comparison['labels'],
         'agents_comparison_data':gr_get_agents_comparison['clients_data'],
         'agents_comparison_pr_lost_dt':gr_get_agents_comparison['prospects_lost_data'],
-        'get_clients_by_labels':gr_get_clients_by_month['labels'],
-        'get_clients_by_data':gr_get_clients_by_month['data'],
+        'get_leads_by_month_labels':gr_get_leads_by_month['labels'],
+        'get_leads_by_month_data':gr_get_leads_by_month['data'],
         'lost_prospects_by_source_labels':gr_get_lost_prospects_by_source['labels'],
         'lost_prospects_by_source_data':gr_get_lost_prospects_by_source['data'],
     }

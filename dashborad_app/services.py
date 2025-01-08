@@ -56,17 +56,15 @@ def get_agents_comparison():
     }
 
 
-def get_clients_by_month():
-    from crm_app.models import Client
-    clients_by_month = (
-        Client.objects.annotate(month=TruncMonth('created_at'))
+def get_prospet_by_month():
+    leads_by_month = (
+        Lead.objects.all().annotate(month=TruncMonth('created_at'))
         .values('month')
         .annotate(total=Count('id'))
         .order_by('month')
     )
-
-    labels = [entry['month'].strftime('%Y-%m') for entry in clients_by_month]
-    data = [entry['total'] for entry in clients_by_month]
+    labels = [entry['month'].strftime('%Y-%m') for entry in leads_by_month]
+    data = [entry['total'] for entry in leads_by_month]
 
     return {
         'labels': json.dumps(labels),

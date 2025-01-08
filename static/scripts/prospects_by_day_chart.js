@@ -51,10 +51,10 @@ renderChart(
 // Clients Gagnés par Mois
 renderChart(
   'clientsByMonthChart',
-  clientsByMonthlabel,
-  clientsByMonthData,
-  'line',
-  'Clients Gagnés'
+  leadsByMonthlabel,
+  leadsByMonthData,
+  'bar',
+  'Prospet Par Mois'
 );
 
 // Prospects Perdus par Source
