@@ -20,6 +20,7 @@
                 <th scope="col">Est appeller</th>
                 <th scope="col">Source de Prospect</th>
                 <th scope="col">agent</th>
+                <th scope="col">Crée</th>
                 <th>Actions</th>
                 
               </tr>
@@ -36,6 +37,7 @@
                         <td>{{ client.lead.phoned|yesno:"Oui,Non" }}</td>
                         <td>{{ client.lead.source }}</td>
                         <td>{{ client.lead.agent }}</td>
+                        <td>{{ client.created_at }}</td>
                         <td>En Construction</td>
                     </tr>
                 {% endfor %}

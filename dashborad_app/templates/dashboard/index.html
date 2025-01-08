@@ -1,41 +1,71 @@
 {% load static %}
 <div class="container mt-4">
-    <h1>Tableau de bord</h1>
+    <h1 class="text-center mb-4">CRM PFA</h1>
 
-    <!-- Graphique : Répartition des Prospects par Source -->
-    <div>
-        <h3>Prospects par jour</h3>
-        <canvas id="prospectsByDay"></canvas>
+    <div class="row">
+        <!-- Prospects par jour -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Prospects par Jour</h5>
+                    <canvas id="prospectsByDay" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Répartition des Prospects par Source -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Répartition des Prospects par Source</h5>
+                    <canvas id="prospectsBySourceChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Graphique : Répartition des Prospects par Source -->
-    <div>
-        <h3>Répartition des Prospects par Source</h3>
-        <canvas id="prospectsBySourceChart"></canvas>
+    <div class="row">
+        <!-- Comparaison des Agents -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Comparaison des Agents</h5>
+                    <canvas id="agentsComparisonChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clients Gagnés par Mois -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Clients Gagnés par Mois</h5>
+                    <canvas id="clientsByMonthChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Graphique : Comparaison des Agents -->
-    <div>
-        <h3>Comparaison des Agents</h3>
-        <canvas id="agentsComparisonChart"></canvas>
-    </div>
+    <div class="row">
+        <!-- Prospects Perdus par Source -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Prospects Perdus par Source</h5>
+                    <canvas id="lostProspectsBySourceChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
 
-    <!-- Graphique : Clients Gagnés par Mois -->
-    <div>
-        <h3>Clients Gagnés par Mois</h3>
-        <canvas id="clientsByMonthChart"></canvas>
-    </div>
-
-    <!-- Graphique : Prospects Perdus par Source -->
-    <div>
-        <h3>Prospects Perdus par Source</h3>
-        <canvas id="lostProspectsBySourceChart"></canvas>
-    </div>
-
-    <!-- Graphique : Agents les Plus Performants -->
-    <div>
-        <h3>Agents les Plus Performants</h3>
-        <canvas id="topPerformingAgentsChart"></canvas>
+        <!-- Agents les Plus Performants -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Agents les Plus Performants</h5>
+                    <canvas id="topPerformingAgentsChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
