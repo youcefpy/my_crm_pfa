@@ -84,3 +84,4 @@ renderChart(
   'bar',
   'Total des prospet par jour'
 );
+

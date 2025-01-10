@@ -1,9 +1,9 @@
 /* Styles personnalisés */
 .navbar {
-    background-color: #007bff; /* Couleur de fond */
+    background-color: #007bff; 
 }
 .navbar-brand, .nav-link {
-    color: #fff !important; /* Couleur du texte */
+    color: #fff !important; 
 }
 .btn-custom {
     color: #007bff;
@@ -15,3 +15,18 @@
     background-color: #0056b3;
     border-color: #004085;
 }
+
+
+.card-body {
+    height: 500px; /* Fixez une hauteur égale pour toutes les cartes */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    max-height: 100%; /* Limite la hauteur du canvas */
+    max-width: 100%; /* S'adapte à la largeur */
+}
+

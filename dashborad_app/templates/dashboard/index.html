@@ -1,6 +1,7 @@
 {% load static %}
+
 <div class="container mt-4">
-    <h1 class="text-center mb-4">CRM PFA</h1>
+    <h1 class="text-center mb-4">CRM</h1>
 
     <div class="row">
         <!-- Prospects par jour -->
@@ -24,14 +25,13 @@
 
 
     </div>
-
     <div class="row">
         <!-- Comparaison des Agents -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Client(s) Gagnier Par Agent</h5>
-                    <canvas id="agentsComparisonChart" width="400" height="200"></canvas>
+                     <h5 class="card-title">Client(s) Gagnier Par Agent</h5>
+                    <canvas id="agentsComparisonChart"></canvas>
                 </div>
             </div>
         </div>
@@ -40,11 +40,12 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Répartition des Prospects par Source</h5>
-                    <canvas id="prospectsBySourceChart" width="400" height="200"></canvas>
+                    <canvas id="prospectsBySourceChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
+    
 
     <div class="row">
         <!-- Prospects Perdus par Source -->
@@ -68,7 +69,7 @@
         </div>
     </div>
 
-    <div class="col-md-6 mb-4">
+    <div class="col-md-12 mb-4">
         <div class="card shadow-sm">
             <div class="card-body">
                 <h5 class="card-title">Total Prospet (prospet + perdus) par Jours</h5>
