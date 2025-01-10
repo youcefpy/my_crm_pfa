@@ -26,7 +26,7 @@ renderChart(
   chartLabels,
   chartData,
   'bar',
-  'Prospects par Source'
+  'Prospects a traité'
 );
 
 
@@ -60,17 +60,27 @@ renderChart(
 // Prospects Perdus par Source
 renderChart(
   'lostProspectsBySourceChart',
-  lostProspectsBySourceLabel,
-  lostProspectsBySourceData,
-  'pie',
-  'Prospects Perdus'
+  lostProspectsByAgentLabel,
+  lostProspectsByAgentData,
+  'bar',
+  'Prospects Perdus par agent'
 );
 
-// Agents les Plus Performants
+//Prospet perdu par source
 renderChart(
   'topPerformingAgentsChart',
-  topPerformingAgentslabel,
-  topPerformingAgentsData,
+  lostLeadBySourceLabel,
+  lostLeadBySourceData,
+  'pie',
+  'Prospet perdu par source'
+);
+
+
+// total leads (plus loss)
+renderChart(
+  'totalLeadsChart',
+  totalLeadsLabels,
+  totalLeadsData,
   'bar',
-  'Agents les Plus Performants'
+  'Total des prospet par jour'
 );

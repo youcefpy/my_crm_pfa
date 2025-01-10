@@ -2,12 +2,11 @@
 {% load static %}
 
 
-{% block title %}CRM-Home{% endblock title %} 
+{% block title %}List des prospet {% endblock title %} 
 
 {% block content %}
     <div class="container">
-        {% include 'dashboard/index.html' %}
-        <h1>Prospect</h1>
+        <h1 class="text-center mb-4">Prospect</h1>
         <table class="table table-bordered">
             <thead>
               <tr>
@@ -26,7 +25,7 @@
               </tr>
             </thead>
             <tbody>
-                {% for lead in leads %}    
+                {% for lead in leads %}
                     <tr>
                         <td>{{ lead.id }}</td>
                         <td>{{ lead.first_name }}</td>

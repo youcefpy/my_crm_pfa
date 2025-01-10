@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Prospet perdus{% endblock title %} 
+
+{% block content %}
+    <div class="container">
+      
+        <h1 class="text-center mb-4">Prospect Perdus</h1>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Numero de tel</th>
+                <th scope="col">Email</th>
+                <th scope="col">Source</th>
+                {% if user.is_superuser %}
+                  <th scope="col">Agent</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for loss_lead in loss_leads %}
+                  <tr>
+                    <td>{{ loss_lead.id }}</td>
+                    <td>{{ loss_lead.first_name }}</td>
+                    <td>{{ loss_lead.last_name }}</td>
+                    <td>{{ loss_lead.phone_number }}</td>
+                    <td>{{ loss_lead.email }}</td>
+                    <td>{{ loss_lead.source }}</td>
+                    {% if user.is_superuser %}
+                      <td>{{ loss_lead.agent }}</td>
+                    {% endif %}      
+                  </tr>
+              {% endfor %}
+          </tbody>          
+          </table>
+
+    </div>
+
+{% endblock content %}
+
+

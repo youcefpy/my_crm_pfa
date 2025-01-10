@@ -1,8 +1,9 @@
 # dashboard_app/services.py
-from crm_app.models import Lead,Agent
+from crm_app.models import Lead,Agent,LossLead,Client
 from django.db.models.functions import TruncMonth,TruncDay
-from django.db.models import Count
+from django.db.models import Count, F
 import json
+
 
 def get_dashboard_data():
     leads_by_day = (
@@ -37,11 +38,11 @@ def get_prospects_by_source():
 
 
 def get_agents_comparison():
-    from django.db import models
+    
     agents_data = (
         Agent.objects.annotate(
-            total_clients=Count('lead__client', distinct=True),
-            total_prospects_lost=Count('lead', filter=~models.Q(lead__is_client=True))
+            total_clients=Count('client', distinct=True),
+            total_prospects_lost=Count('id')
         )
     )
 
@@ -71,39 +72,78 @@ def get_prospet_by_month():
         'data': json.dumps(data),
     }
 
-def get_lost_prospects_by_source():
-
-    lost_prospects_by_source = (
-        Lead.objects.filter(is_client=False)
-        .values('source')
-        .annotate(total=Count('id'))
-        .order_by('-total')
+def get_lost_prospects_by_agent(): 
+    
+    lost_prospects_by_agent = (
+        LossLead.objects.values(agent_username=F('agent__user__username'))  
+        .annotate(total=Count('id'))  
+        .order_by('-total')  
     )
 
-    labels = [entry['source'] for entry in lost_prospects_by_source]
-    data = [entry['total'] for entry in lost_prospects_by_source]
-
+    
+    labels = [entry['agent_username'] for entry in lost_prospects_by_agent]  
+    data = [entry['total'] for entry in lost_prospects_by_agent] 
     return {
         'labels': json.dumps(labels),
         'data': json.dumps(data),
     }
 
 
-def get_top_performing_agents():
-    agents_data = (
-        Agent.objects.annotate(
-            total_clients=Count('lead__client', distinct=True),
-            conversion_rate=(Count('lead__client', distinct=True) * 100) / Count('lead')
-        )
-        .order_by('-total_clients')
+def get_lost_lead_by_source():
+    lost_lead_by_source = (
+        LossLead.objects.values('source')
+        .annotate(total=Count('id'))
+        .order_by('-total')
+    )
+    labels = [entry['source'] for entry in lost_lead_by_source]
+    data = [entry['total'] for entry in lost_lead_by_source]
+
+    return {
+        'labels':json.dumps(labels),
+        'data':json.dumps(data)
+    }
+
+def get_total_leads():
+    # Group and count Leads by day
+    leads_by_day = (
+        Lead.objects.annotate(day=TruncDay('created_at'))
+        .values('day')
+        .annotate(total_leads=Count('id'))
+    )
+    win_lead_day = (
+        Client.objects.annotate(day=TruncDay('created_at'))
+        .values('day')
+        .annotate(total_clients=Count('id'))
     )
 
-    labels = [agent.user.username for agent in agents_data]
-    data = [agent.total_clients for agent in agents_data]
-    conversion_rate = [agent.conversion_rate for agent in agents_data]
+    # Group and count LossLeads by day
+    loss_leads_by_day = (
+        LossLead.objects.annotate(day=TruncDay('created_at'))
+        .values('day')
+        .annotate(total_loss_leads=Count('id'))
+    )
+
+    # Combine the two querysets into a dictionary
+    combined_counts = {}
+
+    for lead in leads_by_day:
+        day = lead['day']
+        combined_counts[day] = combined_counts.get(day, 0) + lead['total_leads']
+
+    for client in win_lead_day:
+        day = client['day']
+        combined_counts[day] = combined_counts.get(day, 0) + client['total_clients']
+
+    for loss_lead in loss_leads_by_day:
+        day = loss_lead['day']
+        combined_counts[day] = combined_counts.get(day, 0) + loss_lead['total_loss_leads']
+
+    # Sort the combined results by day
+    sorted_days = sorted(combined_counts.keys())
+    labels = [day.strftime('%d-%m-%Y') for day in sorted_days]
+    data = [combined_counts[day] for day in sorted_days]
 
     return {
         'labels': json.dumps(labels),
         'data': json.dumps(data),
-        'conversion_rate': json.dumps(conversion_rate),
     }

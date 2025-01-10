@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Clients</h1>
+        <h1 class="text-center mb-4">Clients</h1>
 
         <table class="table table-bordered">
             <thead>
@@ -28,17 +28,17 @@
             <tbody>
                 {% for client in clients %}
                     <tr>
-                        <td>{{ client.lead.id }}</td>
-                        <td>{{ client.lead.first_name }}</td>
-                        <td>{{ client.lead.last_name }}</td>
-                        <td>{{ client.lead.phone_number }}</td>
-                        <td>{{ client.lead.email }}</td>
-                        <td>{{ client.lead.age }}</td>
-                        <td>{{ client.lead.phoned|yesno:"Oui,Non" }}</td>
-                        <td>{{ client.lead.source }}</td>
-                        <td>{{ client.lead.agent }}</td>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.first_name }}</td>
+                        <td>{{ client.last_name }}</td>
+                        <td>{{ client.phone_number }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.age }}</td>
+                        <td>{{ client.phoned|yesno:"Oui,Non" }}</td>
+                        <td>{{ client.source }}</td>
+                        <td>{{ client.agent }}</td>
                         <td>{{ client.created_at }}</td>
-                        <td>En Construction</td>
+                        <td><a href="#" class="btn btn-success">Details</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

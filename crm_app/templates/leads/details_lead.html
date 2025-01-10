@@ -7,7 +7,7 @@
 <div class="container">
     <div class="card mt-4">
         <div class="card-header bg-primary text-white">
-            <h2>{{ get_lead.first_name }} {{ get_lead.last_name }}</h2>
+            <h2 class="text-center mb-4">{{ get_lead.first_name }} {{ get_lead.last_name }}</h2>
         </div>
         <div class="card-body">
             <p><strong>Numero de tel :</strong> {{ get_lead.phone_number }}</p>
@@ -35,7 +35,7 @@
         <div class="card-footer d-flex justify-content-between">
             <div>
                 <a href="{% url 'update_lead' get_lead.id %}" class="btn btn-secondary">Modifier</a>
-                <a href="{% url 'delete_lead' get_lead.id %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prospect ?');">Prospet Perdu</a>
+                <a href="{% url 'loss_lead' get_lead.id %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce prospect ?');">Prospet Perdu</a>
                 <a href="{% url 'send_email' get_lead.id %}" class="btn btn-primary">Envoyer un email</a>
             </div>
             <div>

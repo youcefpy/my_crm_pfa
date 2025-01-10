@@ -12,8 +12,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'create_lead' %}">Crée Prospet</a>
-                    </li>
-                    {% if request.user.is_authenticated %}
+                    </li>                  
                         {% if request.user.is_superuser %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'create_agent' %}">Crée agent</a>
@@ -21,11 +20,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'list_agents' %}">Liste Agents</a>
                             </li>
-                        {% endif %}
-                    {% endif %}
+                        {% endif %}  
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'list_client' %}">Liste des Clients</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list_leads' %}">Liste des prospet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list_loss_leads' %}">Liste des prospet perdus</a>
+                    </li>
+
+                    
+                    
                 </ul>
             {% endif %}
             <div class="d-flex">

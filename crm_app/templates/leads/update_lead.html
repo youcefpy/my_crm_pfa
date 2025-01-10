@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <h1>Modifier le Prospet</h1>
+        <h1 class="text-center mb-4">Modifier le Prospet</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}

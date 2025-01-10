@@ -12,7 +12,29 @@
                 </div>
             </div>
         </div>
+        <!-- Clients Gagnés par Mois -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Prospet par Mois</h5>
+                    <canvas id="clientsByMonthChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
 
+
+    </div>
+
+    <div class="row">
+        <!-- Comparaison des Agents -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Client(s) Gagnier Par Agent</h5>
+                    <canvas id="agentsComparisonChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
         <!-- Répartition des Prospects par Source -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
@@ -25,33 +47,11 @@
     </div>
 
     <div class="row">
-        <!-- Comparaison des Agents -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Comparaison des Agents</h5>
-                    <canvas id="agentsComparisonChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Clients Gagnés par Mois -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Prospet par Mois</h5>
-                    <canvas id="clientsByMonthChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <!-- Prospects Perdus par Source -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Prospects Perdus par Source</h5>
+                    <h5 class="card-title">Prospects Perdus par Agent</h5>
                     <canvas id="lostProspectsBySourceChart" width="400" height="200"></canvas>
                 </div>
             </div>
@@ -61,12 +61,22 @@
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Agents les Plus Performants</h5>
+                    <h5 class="card-title">Prospet Perdus par source</h5>
                     <canvas id="topPerformingAgentsChart" width="400" height="200"></canvas>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Total Prospet (prospet + perdus) par Jours</h5>
+                <canvas id="totalLeadsChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -78,10 +88,13 @@
     const agentsComparisonLeadLostData =JSON.parse(' {{ agents_comparison_pr_lost_dt|safe }}');
     const leadsByMonthlabel = JSON.parse('{{ get_leads_by_month_labels|safe }}');
     const leadsByMonthData = JSON.parse('{{ get_leads_by_month_data|safe }}');
-    const lostProspectsBySourceLabel = JSON.parse('{{ lost_prospects_by_source_labels|safe }}');
-    const lostProspectsBySourceData = JSON.parse('{{ lost_prospects_by_source_Data|safe }}');
-    const topPerformingAgentslabel =JSON.parse(' {{ performing_agents_labels|safe }}');
-    const topPerformingAgentsData =JSON.parse(' {{ performing_agents_data|safe }}');
+    const lostProspectsByAgentLabel = JSON.parse('{{ lost_prospects_by_agent_labels|safe }}');
+    const lostProspectsByAgentData = JSON.parse('{{ lost_prospects_by_agent_data|safe }}');
+    const lostLeadBySourceLabel =JSON.parse(' {{ lost_lead_by_source_labels|safe }}');
+    const lostLeadBySourceData =JSON.parse(' {{ lost_lead_by_source_data|safe }}');
+
+    const totalLeadsLabels = JSON.parse('{{ total_leads_labels|safe }}');
+    const totalLeadsData = JSON.parse('{{ total_leads_data|safe }}');
 </script>
 
 <script>
