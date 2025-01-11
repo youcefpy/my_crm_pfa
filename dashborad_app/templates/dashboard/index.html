@@ -1,84 +1,26 @@
 {% load static %}
 
-<div class="container mt-4">
-    <h1 class="text-center mb-4">CRM</h1>
-
-    <div class="row">
-        <!-- Prospects par jour -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Prospects par Jour</h5>
-                    <canvas id="prospectsByDay" width="400" height="200"></canvas>
-                </div>
-            </div>
+<div class="container">
+    <h1 class="text-center">Tableau de bord</h1>
+    <div class="d-flex ">
+        <div class=" text-center col-2 me-3">
+            <button class="btn btn-primary switch-chart" data-chart="prospectsByDay">Prospects par Jour</button>
+            <button class="btn btn-secondary switch-chart" data-chart="clientsByMonthChart">Prospet par Mois</button>
+            <button class="btn btn-secondary switch-chart" data-chart="agentsComparisonChart">Clients Gagnés Par Agent</button>
+            <button class="btn btn-secondary switch-chart" data-chart="prospectsBySourceChart">Répartition des Prospects</button>
+            <button class="btn btn-secondary switch-chart" data-chart="lostProspectsBySourceChart">Prospects Perdus Par Agent</button>
+            <button class="btn btn-secondary switch-chart" data-chart="topPerformingAgentsChart">Prospet Perdus par Source</button>
+            <button class="btn btn-secondary switch-chart" data-chart="totalLeadsChart">Total Prospects par Jour</button>
         </div>
-        <!-- Clients Gagnés par Mois -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Prospet par Mois</h5>
-                    <canvas id="clientsByMonthChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <div class="row">
-        <!-- Comparaison des Agents -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                     <h5 class="card-title">Client(s) Gagnier Par Agent</h5>
-                    <canvas id="agentsComparisonChart"></canvas>
-                </div>
-            </div>
-        </div>
-        <!-- Répartition des Prospects par Source -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Répartition des Prospects par Source</h5>
-                    <canvas id="prospectsBySourceChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="row">
-        <!-- Prospects Perdus par Source -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Prospects Perdus par Agent</h5>
-                    <canvas id="lostProspectsBySourceChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Agents les Plus Performants -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Prospet Perdus par source</h5>
-                    <canvas id="topPerformingAgentsChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm">
+        <!-- Single Canvas for All Charts -->
+        <div class="card mb-2 ">
             <div class="card-body">
-                <h5 class="card-title">Total Prospet (prospet + perdus) par Jours</h5>
-                <canvas id="totalLeadsChart" width="400" height="200"></canvas>
+                <canvas id="dynamicChartCanvas" width="400" height="200"></canvas>
             </div>
         </div>
     </div>
-
 </div>
+
 
 <script>
     // Données pour les graphiques

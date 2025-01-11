@@ -1,48 +1,43 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-        
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            {# <span class="navbar-toggler-icon"></span> #}
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            {% if request.user.is_authenticated %}            
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse flex-column" id="navbarNav">
+            {% if request.user.is_authenticated %}
+                <ul class="navbar-nav flex-column mb-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'create_lead' %}">Crée Prospet</a>
-                    </li>                  
-                        {% if request.user.is_superuser %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'create_agent' %}">Crée agent</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'list_agents' %}">Liste Agents</a>
-                            </li>
-                        {% endif %}  
+                        <a class="nav-link" href="{% url 'create_lead' %}">Créer Prospet</a>
+                    </li>
+                    {% if request.user.is_superuser %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create_agent' %}">Créer Agent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'list_agents' %}">Liste Agents</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'list_client' %}">Liste des Clients</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'list_leads' %}">Liste des prospet</a>
+                        <a class="nav-link" href="{% url 'list_leads' %}">Liste des Prospects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'list_loss_leads' %}">Liste des prospet perdus</a>
+                        <a class="nav-link" href="{% url 'list_loss_leads' %}">Liste des Prospects Perdus</a>
                     </li>
-
-                    
-                    
                 </ul>
             {% endif %}
-            <div class="d-flex">
+            <div class="d-flex flex-column align-items-start mt-3">
                 {% if request.user.is_authenticated %}
-                <a class="nav-link">Bonjour, {{ request.user.username }}</a>
-                <a href="{% url 'logout' %}" class="btn btn-light">Se déconnecter</a>
+                    <span class="nav-link text-white">Bonjour, {{ request.user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn btn-light btn-sm mt-2">Se déconnecter</a>
                 {% else %}
-                
-                    <a href="{% url 'login' %}" class="btn btn-custom me-2">Connexion</a>
-                    <a href="{% url 'signup' %}" class="btn btn-custom me-2">S'inscrire</a>
+                    <a href="{% url 'login' %}" class="btn btn-custom btn-sm mb-2">Connexion</a>
+                    <a href="{% url 'signup' %}" class="btn btn-custom btn-sm">S'inscrire</a>
                 {% endif %}
             </div>
         </div>
