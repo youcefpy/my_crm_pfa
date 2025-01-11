@@ -35,9 +35,6 @@
                 {% if request.user.is_authenticated %}
                     <span class="nav-link text-white">Bonjour, {{ request.user.username }}</span>
                     <a href="{% url 'logout' %}" class="btn btn-light btn-sm mt-2">Se déconnecter</a>
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-custom btn-sm mb-2">Connexion</a>
-                    <a href="{% url 'signup' %}" class="btn btn-custom btn-sm">S'inscrire</a>
                 {% endif %}
             </div>
         </div>

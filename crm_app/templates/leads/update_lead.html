@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 
-{% block title %}Formulaire Prospet{% endblock %}
+{% block title %}Modif Formulaire Prospet{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="text-center mb-4">Modifier le Prospet</h1>
-        <form method="post" enctype="multipart/form-data">
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-sm p-4" style="width: 920px; border-radius: 10px;">
+        <h2 class="text-center mb-4">Modification Prospet</h2>
+        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-success">Mettre a jour</button>
+            <div class="mb-3">
+                {{ form|crispy }}
+            </div>
+            <button type="submit" class="btn btn-success w-100">Mettre a jour</button>
         </form>
-
     </div>
+</div>
 {% endblock %}
