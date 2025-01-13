@@ -15,6 +15,7 @@
             <p><strong>Âge :</strong> {{ get_lead.age }}</p>
             <p><strong>A été appelé :</strong> {{ get_lead.phoned|yesno:"Oui,Non" }}</p>
             <p><strong>Source de prospect :</strong> {{ get_lead.source }}</p>
+            <p><strong>Prix :</strong> {{ get_lead.price }} €</p>
             <p><strong>Agent :</strong> {{ get_lead.agent }}</p>
 
             {% if get_lead.profile_picture %}
